@@ -30,6 +30,5 @@ jobs:
 
       - run: |
           echo "Building jq-web"
-          cd main
           make
           npm install
