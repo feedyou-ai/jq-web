@@ -25,13 +25,16 @@ jobs:
           actions-cache-folder: ${{env.EM_CACHE_FOLDER}}
 
       - name: Verify
-        run: emcc -v
+        run: emsdk list
+
+      - name: Add to path
+        run: source $HOME/emsdk/emsdk_env.sh
 
       - uses: actions/checkout@v4
         with:
           submodules: true
 
-      - run: |
-          echo "Building jq-web"
+      - name: Build jq-web
+        run: |
           make
           npm install
