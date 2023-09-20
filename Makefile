@@ -22,7 +22,7 @@ jq/configure: .gitmodules
 	  autoreconf -fi
 
 jq/jq.o: jq/configure
-	cd jq && \
+	cd jq && echo $PATH && echo "\n\n\n" && \
 	  emconfigure ./configure --disable-maintainer-mode --with-oniguruma=builtin && \
 	  make clean && \
 	  env CCFLAGS=-O2 emmake make LDFLAGS=-all-static CCFLAGS=-O2 -j4 && \

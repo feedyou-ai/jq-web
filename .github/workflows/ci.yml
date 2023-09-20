@@ -33,6 +33,5 @@ jobs:
 
       - name: Build jq-web
         run: |
-          source /home/runner/work/jq-web/jq-web/emsdk-cache/emsdk-main/emsdk_env.sh
           make
           npm install
