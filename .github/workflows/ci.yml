@@ -30,6 +30,11 @@ jobs:
         with:
           submodules: true
 
+      - name: Build jq-web
+        run: |
+          make
+          npm install
+
       - name: Test
         run: |
           node test.js
