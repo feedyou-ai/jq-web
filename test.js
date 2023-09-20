@@ -5,16 +5,16 @@ var tape = require('tape')
 var jq = require('./jq.asm.js')
 var jqMin = require('./jq.asm.min.js')
 
-tape('jq', function(t) {
+tape('jq', function (t) {
   t.plan(3)
 
   jq.onInitialized.addListener(() => {
     t.deepEquals(
       jq.json(
-        {a: 'a letter', b: 'other letter', '%': null},
+        { a: 'a letter', b: 'other letter', '%': null },
         '[.a, .["%"]] | {res: .}'
       ),
-      {res: ['a letter', null]}
+      { res: ['a letter', null] }
     )
 
     t.equals(
@@ -23,22 +23,34 @@ tape('jq', function(t) {
     )
 
     t.equals(
-      jq.json({message: 'This is an emoji test 🙏'}, '.message'),
+      jq.json({ message: 'This is an emoji test 🙏' }, '.message'),
       'This is an emoji test 🙏'
     )
   })
 })
 
-tape('jq.min', function(t) {
+tape('jq -- 2046 bug', function (t) {
+  t.plan(4098)
+
+  jq.onInitialized.addListener(() => {
+    for (let i = 0; i < 4098; i++) {
+      const response = jq.json({ ok: i }, '.')
+
+      t.deepEquals(response, { ok: i })
+    }
+  })
+})
+
+tape('jq.min', function (t) {
   t.plan(3)
 
   jqMin.onInitialized.addListener(() => {
     t.deepEquals(
       jqMin.json(
-        {a: 'a letter', b: 'other letter', '%': null},
+        { a: 'a letter', b: 'other letter', '%': null },
         '[.a, .["%"]] | {res: .}'
       ),
-      {res: ['a letter', null]}
+      { res: ['a letter', null] }
     )
 
     t.equals(
@@ -47,27 +59,27 @@ tape('jq.min', function(t) {
     )
 
     t.equals(
-      jqMin.json({message: 'This is an emoji test 🙏'}, '.message'),
+      jqMin.json({ message: 'This is an emoji test 🙏' }, '.message'),
       'This is an emoji test 🙏'
     )
   })
 })
 
-tape('jq.promise', function(t) {
+tape('jq.promise', function (t) {
   t.plan(2)
 
   jqMin.promised
     .json(
-      {a: 'a letter', b: 'other letter', '%': null},
+      { a: 'a letter', b: 'other letter', '%': null },
       '[.a, .["%"]] | {res: .}'
     )
-    .then(res => {
-      t.deepEquals(res, {res: ['a letter', null]})
+    .then((res) => {
+      t.deepEquals(res, { res: ['a letter', null] })
     })
 
   jqMin.promised
     .raw('["a", {"12": "üñìçôdẽ"}]', '.[1]["12"] | {"what?": .}')
-    .then(res => {
+    .then((res) => {
       t.equals(res, `{\n  "what?": "üñìçôdẽ"\n}`)
     })
 })
