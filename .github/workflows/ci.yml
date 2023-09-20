@@ -2,31 +2,31 @@ name: CI
 
 on: push
 
+env:
+  EM_VERSION: 1.39.14
+  EM_CACHE_FOLDER: "emsdk-cache"
+
 jobs:
   build-jq:
     runs-on: ubuntu-latest
 
     steps:
-      - name: emscripten
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+      - name: Setup cache
+        id: cache-system-libraries
+        uses: actions/cache@v2
         with:
-          repository: "emscripten-core/emsdk"
-          path: emsdk
-      - uses: actions/setup-node@v3
+          path: ${{env.EM_CACHE_FOLDER}}
+          key: ${{env.EM_VERSION}}-${{ runner.os }}
 
-      - name: jq-web
-        uses: actions/checkout@v4
+      - uses: mymindstorm/setup-emsdk@v11
         with:
-          path: main
+          version: ${{env.EM_VERSION}}
+          actions-cache-folder: ${{env.EM_CACHE_FOLDER}}
+
+      - uses: actions/checkout@v4
+        with:
           submodules: true
-
-      - run: |
-          echo "Installing emscripten"
-          cd emsdk
-          ./emsdk install 1.39.14
-          ./emsdk activate 1.39.14
-          source ./emsdk_env.sh
-          cd ..
 
       - run: |
           echo "Building jq-web"
