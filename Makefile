@@ -9,10 +9,13 @@
 #  ~/emsdk-portable/emsdk activate latest
 #  source ~/emsdk-portable/emsdk_env.sh
 
-all: jq.asm.js jq.asm.min.js jq.wasm.js jq.wasm.min.js jq.wasm.wasm jq.asm.bundle.js jq.asm.bundle.min.js
+all: echoPath jq.asm.js jq.asm.min.js jq.wasm.js jq.wasm.min.js jq.wasm.wasm jq.asm.bundle.js jq.asm.bundle.min.js
 
 clean:
 	rm jq.*
+
+echoPath:
+	@echo $(PATH)
 
 jq/configure: .gitmodules
 	git submodule update --init
@@ -22,7 +25,7 @@ jq/configure: .gitmodules
 	  autoreconf -fi
 
 jq/jq.o: jq/configure
-	cd jq && echo $PATH && echo "\n\n\n" && \
+	cd jq && \
 	  emconfigure ./configure --disable-maintainer-mode --with-oniguruma=builtin && \
 	  make clean && \
 	  env CCFLAGS=-O2 emmake make LDFLAGS=-all-static CCFLAGS=-O2 -j4 && \
