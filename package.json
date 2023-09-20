@@ -1,5 +1,5 @@
 {
-  "name": "jq-web",
+  "name": "@pixiebrix/jq-web",
   "version": "0.5.1",
   "description": "a hack that makes jq run in the browser with emscripten.",
   "main": "jq.asm.bundle.min.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fiatjaf/jq-web.git"
+    "url": "git+https://github.com/pixiebrix/jq-web.git"
   },
   "keywords": [
     "emscriptem",
@@ -20,9 +20,9 @@
   "author": "fiatjaf",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/fiatjaf/jq-web/issues"
+    "url": "https://github.com/pixiebrix/jq-web/issues"
   },
-  "homepage": "https://github.com/fiatjaf/jq-web#readme",
+  "homepage": "https://github.com/pixiebrix/jq-web/jq-web#readme",
   "devDependencies": {
     "tape": "^4.9.1",
     "uglify-es": "^3.3.9",
