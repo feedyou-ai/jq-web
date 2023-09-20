@@ -9,13 +9,10 @@
 #  ~/emsdk-portable/emsdk activate latest
 #  source ~/emsdk-portable/emsdk_env.sh
 
-all: echoPath jq.asm.js jq.asm.min.js jq.wasm.js jq.wasm.min.js jq.wasm.wasm jq.asm.bundle.js jq.asm.bundle.min.js
+all: jq.asm.js jq.asm.min.js jq.wasm.js jq.wasm.min.js jq.wasm.wasm jq.asm.bundle.js jq.asm.bundle.min.js
 
 clean:
 	rm jq.*
-
-echoPath:
-	@echo $(PATH)
 
 jq/configure: .gitmodules
 	git submodule update --init
