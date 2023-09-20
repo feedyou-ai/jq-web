@@ -8,7 +8,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
       - uses: mymindstorm/setup-emsdk@v11
         with:
           version: ${{env.EM_VERSION}}
