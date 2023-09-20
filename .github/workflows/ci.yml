@@ -25,10 +25,10 @@ jobs:
           actions-cache-folder: ${{env.EM_CACHE_FOLDER}}
 
       - name: Verify
-        run: emsdk list
+        run: emcc -v
 
       - name: Add to path
-        run: source $HOME/emsdk/emsdk_env.sh
+        run: source /home/runner/work/jq-web/jq-web/emsdk-cache/emsdk-main/emsdk_env.sh
 
       - uses: actions/checkout@v4
         with:
