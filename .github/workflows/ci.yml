@@ -30,5 +30,6 @@ jobs:
 
       - run: |
           echo "Building jq-web"
+          source ~/emsdk-portable/emsdk_env.sh
           make
           npm install
