@@ -1,0 +1,34 @@
+name: CI
+
+on: push
+
+jobs:
+  build-jq:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: emscripten
+        uses: actions/checkout@v4
+        with:
+          repository: "emscripten-core/emsdk"
+          path: emsdk
+      - uses: actions/setup-node@v3
+
+      - name: jq-web
+        uses: actions/checkout@v4
+        with:
+          path: main
+
+      - run: |
+          echo "Installing emscripten"
+          cd emsdk
+          ./emsdk install 1.39.14
+          ./emsdk activate 1.39.14
+          source ./emsdk_env.sh
+          cd ..
+
+      - run: |
+          echo "Building jq-web"
+          cd main
+          make
+          npm install
