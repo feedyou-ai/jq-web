@@ -2,6 +2,11 @@ name: Publish Package to npmjs
 on:
   release:
     types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version accepted by `npm version *`"
+        required: true
 env:
   EM_VERSION: 1.39.14
 jobs:
