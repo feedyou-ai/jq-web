@@ -1,7 +1,12 @@
 name: Publish Package to npmjs
 on:
-  release:
-    types: [published]
+  # release:
+  #   types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version accepted by `npm version *`"
+        required: true
 env:
   EM_VERSION: 1.39.14
 jobs:
@@ -23,6 +28,7 @@ jobs:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
       - run: npm ci
+      - run: npm version ${{ github.event.inputs.version }}
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
