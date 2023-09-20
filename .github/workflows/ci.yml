@@ -27,14 +27,12 @@ jobs:
       - name: Verify
         run: emcc -v
 
-      - name: Add to path
-        run: source /home/runner/work/jq-web/jq-web/emsdk-cache/emsdk-main/emsdk_env.sh
-
       - uses: actions/checkout@v4
         with:
           submodules: true
 
       - name: Build jq-web
         run: |
+          source /home/runner/work/jq-web/jq-web/emsdk-cache/emsdk-main/emsdk_env.sh
           make
           npm install
