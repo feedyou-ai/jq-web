@@ -1,6 +1,6 @@
 {
   "name": "@feedyou-ai/jq-web",
-  "version": "0.5.1",
+  "version": "0.5.1-2",
   "description": "a hack that makes jq run in the browser with emscripten.",
   "main": "jq.asm.bundle.min.js",
   "scripts": {
