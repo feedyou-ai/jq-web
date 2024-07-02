@@ -23,6 +23,9 @@
     "url": "https://github.com/feedyou-ai/jq-web/issues"
   },
   "homepage": "https://github.com/feedyou-ai/jq-web/jq-web#readme",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/feedyou-ai"
+  },
   "devDependencies": {
     "tape": "^4.9.1",
     "uglify-es": "^3.3.9",
